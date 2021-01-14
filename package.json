@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/OlyErofeeva/news-explorer-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.11",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",
