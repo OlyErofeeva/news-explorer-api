@@ -1,8 +1,7 @@
 {
   "name": "news-explorer-api",
   "version": "1.0.0",
-  "description": "backend for the diploma project news-explorer",
-  "main": "index.js",
+  "description": "backend for the diploma project: news-explorer",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js"
@@ -19,6 +18,8 @@
   },
   "homepage": "https://github.com/OlyErofeeva/news-explorer-api#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.11.11",
     "validator": "^13.5.2"
