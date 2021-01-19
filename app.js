@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 const routes = require('./routes/index');
 const NotFoundError = require('./errors/not-found-error');
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(cors());
+app.use(helmet());
 
 app.use(bodyParser.json());
 app.use(routes);
