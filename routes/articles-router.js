@@ -1,8 +1,10 @@
 const router = require('express').Router();
 
+const auth = require('../middlewares/auth');
 const { getBookmarkedArticles, addArticleBookmark, removeArticleBookmark } = require('../controllers/articles-controller');
-// TODO: auth check
 // TODO: validation - celebrate
+
+router.use(auth);
 
 // GET: возвращает все сохраненные пользователем статьи
 router.get('/articles', getBookmarkedArticles);
