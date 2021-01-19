@@ -6,6 +6,7 @@ const helmet = require('helmet');
 
 const routes = require('./routes/index');
 const limiter = require('./configs/rate-limiter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-error');
 
 const app = express();
@@ -21,11 +22,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
+app.use(requestLogger);
 
 app.use(limiter);
 app.use(routes);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
+
+app.use(errorLogger);
 
 app.listen(PORT);
