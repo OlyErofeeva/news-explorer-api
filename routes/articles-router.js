@@ -1,8 +1,12 @@
 const router = require('express').Router();
 
 const auth = require('../middlewares/auth');
-const { getBookmarkedArticles, addArticleBookmark, removeArticleBookmark } = require('../controllers/articles-controller');
-// TODO: validation - celebrate
+const { validateArticleBody, validateObjectIdParam } = require('../middlewares/validation');
+const {
+  getBookmarkedArticles,
+  addArticleBookmark,
+  removeArticleBookmark,
+} = require('../controllers/articles-controller');
 
 router.use(auth);
 
@@ -10,9 +14,9 @@ router.use(auth);
 router.get('/articles', getBookmarkedArticles);
 
 // POST: добавляет статью с переданными параметрами в сохраненные
-router.post('/articles', addArticleBookmark);
+router.post('/articles', validateArticleBody, addArticleBookmark);
 
 // DELETE: удаляет статью из сохраненных по id
-router.delete('/articles/:id', removeArticleBookmark);
+router.delete('/articles/:id', validateObjectIdParam, removeArticleBookmark);
 
 module.exports = router;

@@ -6,6 +6,6 @@ const { getCurrentUser } = require('../controllers/users-controller');
 router.use(auth);
 
 // GET: возвращает данные текущего пользователя
-router.get('/user/me', getCurrentUser);
+router.get('/users/me', getCurrentUser);
 
 module.exports = router;

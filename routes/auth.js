@@ -1,12 +1,12 @@
 const router = require('express').Router();
 
 const { createUser, login } = require('../controllers/users-controller');
-// TODO: validation - celebrate
+const { validateUserBody, validateAuthentication } = require('../middlewares/validation');
 
 // POST: создаёт пользователя с переданными email, password, name
-router.post('/signup', createUser);
+router.post('/signup', validateUserBody, createUser);
 
 // POST: проверяет переданные email и password, возвращает JWT
-router.post('/signin', login);
+router.post('/signin', validateAuthentication, login);
 
 module.exports = router;

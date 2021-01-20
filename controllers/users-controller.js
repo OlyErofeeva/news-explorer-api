@@ -21,12 +21,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
       name,
     }))
-    .then((user) => {
-      const userWithoutPassword = { ...user._doc };
-      delete userWithoutPassword.password;
-
-      res.send(userWithoutPassword);
-    })
+    .then((user) => res.send({ _id: user._id }))
     .catch((err) => next(err)); // TODO: (err) => validationErrorHandler(err, next)
 };
 

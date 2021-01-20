@@ -29,7 +29,7 @@ module.exports.addArticleBookmark = (req, res, next) => {
     image,
     owner: req.user._id,
   })
-    .then((article) => res.send(article))
+    .then((article) => res.send({ _id: article._id }))
     .catch((err) => next(err));
   // TODO: validation err handler? like: (err) => validationErrorHandler(err, next)
 };
