@@ -1,6 +1,6 @@
 const jwtVerify = require('../utils/jwt-verify');
 const UnauthorizedError = require('../errors/unauthorized-error');
-const { USER_TOKEN_INCORRECT_FORMAT_MESSAGE, USER_TOKEN_INVALID_MESSAGE } = require('../utils/error-messages');
+const { USER_TOKEN_INCORRECT_FORMAT_MESSAGE, USER_TOKEN_INVALID_MESSAGE } = require('../configs/error-messages');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;

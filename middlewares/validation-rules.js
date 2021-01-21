@@ -9,7 +9,7 @@ const {
   incorrectParamMessageTemplate,
   minLengthMessageTemplate,
   maxLengthMessageTemplate,
-} = require('../utils/error-messages');
+} = require('../configs/error-messages');
 
 const emailRule = Joi.string().trim().lowercase()
   .required()

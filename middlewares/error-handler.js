@@ -1,4 +1,4 @@
-const { INTERNAL_ERROR_MESSAGE } = require('../utils/error-messages');
+const { INTERNAL_ERROR_MESSAGE } = require('../configs/error-messages');
 
 module.exports.errorHandler = ((err, req, res, next) => {
   const { statusCode = 500, message } = err;

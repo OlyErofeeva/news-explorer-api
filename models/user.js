@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const UnauthorizedError = require('../errors/unauthorized-error');
-const { USER_LOGIN_FAILED_MESSAGE } = require('../utils/error-messages');
+const { USER_LOGIN_FAILED_MESSAGE } = require('../configs/error-messages');
 
 const userSchema = new mongoose.Schema({
   email: {

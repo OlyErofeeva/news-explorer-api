@@ -1,7 +1,7 @@
 const Article = require('../models/article');
 const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
-const { ARTICLE_NOT_FOUND_MESSAGE, ARTICLE_REMOVE_FORBIDDEN_MESSAGE } = require('../utils/error-messages');
+const { ARTICLE_NOT_FOUND_MESSAGE, ARTICLE_REMOVE_FORBIDDEN_MESSAGE } = require('../configs/error-messages');
 
 module.exports.getBookmarkedArticles = (req, res, next) => {
   Article.find({ owner: req.user._id })

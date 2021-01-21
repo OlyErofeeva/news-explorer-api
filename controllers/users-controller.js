@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/not-found-error');
 const ConflictError = require('../errors/conflict-error');
 const jwtSign = require('../utils/jwt-sign');
 const { SALT_ROUND } = require('../configs/index');
-const { USER_CONFLICT_MESSAGE, USER_NOT_FOUND_MESSAGE } = require('../utils/error-messages');
+const { USER_CONFLICT_MESSAGE, USER_NOT_FOUND_MESSAGE } = require('../configs/error-messages');
 
 module.exports.createUser = (req, res, next) => {
   const { email, password, name } = req.body;
