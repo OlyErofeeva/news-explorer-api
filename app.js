@@ -23,11 +23,11 @@ mongoose.connect(MONGO_URL, {
 });
 
 app.use(cors());
+app.use(requestLogger);
+app.use(limiter);
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(requestLogger);
-
-app.use(limiter);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 app.use('*', (req, res, next) => {
   next(new NotFoundError(ROUTE_NOT_FOUND_MESSAGE));
