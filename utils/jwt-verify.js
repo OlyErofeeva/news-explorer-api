@@ -1,10 +1,9 @@
 const jwt = require('jsonwebtoken');
-const { NODE_ENV, JWT_SECRET } = require('../configs/index');
+const { JWT_SECRET } = require('../configs');
 
 const jwtVerify = (token) => {
   try {
-    const decoded = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-jwt-secret');
-    return decoded;
+    return jwt.verify(token, JWT_SECRET); // decoded token's payload
   } catch (err) {
     return false;
   }

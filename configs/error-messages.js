@@ -8,10 +8,10 @@ const minLengthMessageTemplate = (fieldName, fieldMinLength) => `Минимал�
 const maxLengthMessageTemplate = (fieldName, fieldMaxLength) => `Максимальная длина поля "${fieldName}" - ${fieldMaxLength}`;
 
 // statusCode = 401 error messages
-const USER_UNAUTHORIZED_MESSAGE = 'Доступ к запрашиваемому ресурсу разрешен только авторизованным пользователям';
-const USER_LOGIN_FAILED_MESSAGE = 'Неправильные почта или пароль';
-const USER_TOKEN_INCORRECT_FORMAT_MESSAGE = 'Токен не передан или передан некорректно';
-const USER_TOKEN_INVALID_MESSAGE = 'Переданный токен невалиден';
+const USER_UNAUTHORIZED_MESSAGE = 'Для доступа к запрашиваемому ресурсу необходима авторизация';
+const USER_LOGIN_FAILED_MESSAGE = 'Ошибка авторизации. Неправильные почта или пароль';
+const USER_TOKEN_INCORRECT_FORMAT_MESSAGE = 'Ошибка авторизации. Токен передан некорректно';
+const USER_TOKEN_INVALID_MESSAGE = 'Ошибка авторизации. Пожалуйста, авторизуйтесь снова';
 
 // statusCode = 403 error messages
 const ARTICLE_REMOVE_FORBIDDEN_MESSAGE = 'Недостаточно прав на удаление выбранной статьи из сохранённых';
