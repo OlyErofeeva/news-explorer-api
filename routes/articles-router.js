@@ -1,7 +1,10 @@
 const router = require('express').Router();
 
 const auth = require('../middlewares/auth');
-const { validateArticleBody, validateObjectIdParam } = require('../middlewares/validation');
+const {
+  validateArticleBody,
+  validateObjectIdParam,
+} = require('../middlewares/validation-rules');
 const {
   getBookmarkedArticles,
   addArticleBookmark,

@@ -5,6 +5,7 @@ const NotFoundError = require('../errors/not-found-error');
 const ConflictError = require('../errors/conflict-error');
 const jwtSign = require('../utils/jwt-sign');
 const { SALT_ROUND } = require('../configs/index');
+const { USER_CONFLICT_MESSAGE, USER_NOT_FOUND_MESSAGE } = require('../utils/error-messages');
 
 module.exports.createUser = (req, res, next) => {
   const { email, password, name } = req.body;
@@ -12,7 +13,7 @@ module.exports.createUser = (req, res, next) => {
   User.findOne({ email })
     .then((user) => {
       if (user) {
-        throw new ConflictError();
+        throw new ConflictError(USER_CONFLICT_MESSAGE);
       }
       return bcrypt.hash(password, SALT_ROUND);
     })
@@ -42,7 +43,7 @@ module.exports.getCurrentUser = (req, res, next) => {
       if (user) {
         res.send(user);
       } else {
-        throw new NotFoundError('Нет пользователя с таким id'); // TODO: message
+        throw new NotFoundError(USER_NOT_FOUND_MESSAGE);
       }
     })
     .catch((err) => next(err));

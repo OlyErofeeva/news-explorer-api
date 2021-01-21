@@ -10,6 +10,7 @@ const limiter = require('./configs/rate-limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./middlewares/error-handler');
 const NotFoundError = require('./errors/not-found-error');
+const { ROUTE_NOT_FOUND_MESSAGE } = require('./utils/error-messages');
 
 const app = express();
 const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
@@ -29,7 +30,8 @@ app.use(requestLogger);
 app.use(limiter);
 app.use(routes);
 app.use('*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден')); // TODO защитить все авторизацией, чтобы нельзя было понять какие роуты есть в приложении. Авторизованным пользователям - 404
+  next(new NotFoundError(ROUTE_NOT_FOUND_MESSAGE));
+  // TODO защитить все авторизацией. Авторизованным - 404
 });
 
 app.use(errorLogger);

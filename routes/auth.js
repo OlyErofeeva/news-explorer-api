@@ -1,7 +1,10 @@
 const router = require('express').Router();
 
 const { createUser, login } = require('../controllers/users-controller');
-const { validateUserBody, validateAuthentication } = require('../middlewares/validation');
+const {
+  validateUserBody,
+  validateAuthentication,
+} = require('../middlewares/validation-rules');
 
 // POST: создаёт пользователя с переданными email, password, name
 router.post('/signup', validateUserBody, createUser);

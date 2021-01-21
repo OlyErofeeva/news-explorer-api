@@ -1,6 +1,7 @@
 const Article = require('../models/article');
 const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
+const { ARTICLE_NOT_FOUND_MESSAGE, ARTICLE_REMOVE_FORBIDDEN_MESSAGE } = require('../utils/error-messages');
 
 module.exports.getBookmarkedArticles = (req, res, next) => {
   Article.find({ owner: req.user._id })
@@ -39,11 +40,11 @@ module.exports.removeArticleBookmark = (req, res, next) => {
   Article.findById(id)
     .then((article) => {
       if (!article) {
-        throw new NotFoundError('Нет статьи с таким id в сохраненных'); // TODO: message
+        throw new NotFoundError(ARTICLE_NOT_FOUND_MESSAGE);
       }
 
       if (article.owner !== req.user._id) { // TODO (card.owner._id.toString() !== req.user._id)
-        throw new ForbiddenError('Недостаточно прав на удаление выбранной статьи из сохраненных'); // TODO: message
+        throw new ForbiddenError(ARTICLE_REMOVE_FORBIDDEN_MESSAGE);
       }
 
       return Article.findByIdAndRemove(id)
