@@ -36,18 +36,18 @@ module.exports.addArticleBookmark = (req, res, next) => {
 
 module.exports.removeArticleBookmark = (req, res, next) => {
   const { id } = req.params;
-  Article.findById(id)
-    .then((article) => {
-      if (!article) {
+  Article.findById(id).select('+owner')
+    .then((articleWithOwner) => {
+      if (!articleWithOwner) {
         throw new NotFoundError(ARTICLE_NOT_FOUND_MESSAGE);
       }
 
-      if (article.owner !== req.user._id) { // TODO (card.owner._id.toString() !== req.user._id)
+      if (articleWithOwner.owner._id.toString() !== req.user._id) {
         throw new ForbiddenError(ARTICLE_REMOVE_FORBIDDEN_MESSAGE);
       }
 
       return Article.findByIdAndRemove(id)
-        .then(() => res.send(article))
+        .then((article) => res.send(article))
         .catch((err) => next(err));
     })
     .catch((err) => next(err));
