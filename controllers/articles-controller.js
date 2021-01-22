@@ -32,7 +32,6 @@ module.exports.addArticleBookmark = (req, res, next) => {
   })
     .then((article) => res.send({ _id: article._id }))
     .catch((err) => next(err));
-  // TODO: validation err handler? like: (err) => validationErrorHandler(err, next)
 };
 
 module.exports.removeArticleBookmark = (req, res, next) => {

@@ -23,7 +23,7 @@ module.exports.createUser = (req, res, next) => {
       name,
     }))
     .then((user) => res.send({ _id: user._id }))
-    .catch((err) => next(err)); // TODO: (err) => validationErrorHandler(err, next)
+    .catch((err) => next(err));
 };
 
 module.exports.login = (req, res, next) => {

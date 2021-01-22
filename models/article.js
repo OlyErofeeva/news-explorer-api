@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const { DB_URL_FORMAT_MESSAGE } = require('../configs/error-messages');
+
 const articleSchema = new mongoose.Schema({
   keyword: {
     type: String,
@@ -29,7 +31,7 @@ const articleSchema = new mongoose.Schema({
       validator(v) {
         return validator.isURL(v);
       },
-      message: 'invalid URL format', // TODO: message
+      message: DB_URL_FORMAT_MESSAGE,
     },
   },
   image: {
@@ -39,7 +41,7 @@ const articleSchema = new mongoose.Schema({
       validator(v) {
         return validator.isURL(v);
       },
-      message: 'invalid URL format', // TODO: message. Also check required fields messages
+      message: DB_URL_FORMAT_MESSAGE,
     },
   },
   owner: {

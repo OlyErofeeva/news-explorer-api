@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const UnauthorizedError = require('../errors/unauthorized-error');
-const { USER_LOGIN_FAILED_MESSAGE } = require('../configs/error-messages');
+const { USER_LOGIN_FAILED_MESSAGE, DB_EMAIL_FORMAT_MESSAGE } = require('../configs/error-messages');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return validator.isEmail(v);
       },
-      message: 'invalid email format', // TODO: message
+      message: DB_EMAIL_FORMAT_MESSAGE,
     },
   },
   password: {

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const { errors } = require('celebrate');
 
 const { PORT, MONGO_URL } = require('./configs');
 const routes = require('./routes');
@@ -28,7 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 app.use(errorLogger);
-app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT);

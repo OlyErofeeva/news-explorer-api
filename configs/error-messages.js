@@ -1,11 +1,15 @@
-// statusCode = 400 error messages (validation)
-const requiredMessageTemplate = (fieldName) => `Отсутствует обязательное поле "${fieldName}"`;
-const emptyFieldMessageTemplate = (fieldName) => `Поле "${fieldName}" не может быть пустым`;
-const stringTypeMessageTemplate = (fieldName) => `Поле "${fieldName}" должно быть строкой`;
-const incorrectFormatMessageTemplate = (fieldName) => `Некорректный формат поля "${fieldName}"`;
-const incorrectParamMessageTemplate = (paramName) => `Некорректный формат параметра "${paramName}"`;
-const minLengthMessageTemplate = (fieldName, fieldMinLength) => `Минимальная длина поля "${fieldName}" - ${fieldMinLength}`;
-const maxLengthMessageTemplate = (fieldName, fieldMaxLength) => `Максимальная длина поля "${fieldName}" - ${fieldMaxLength}`;
+// statusCode = 400 error messages
+// request validation messages:
+const REQUIRED_FIELD_MESSAGE = 'Отсутствует обязательное поле {#label}';
+const EMPTY_FIELD_MESSAGE = 'Поле {#label} не может быть пустым';
+const STRING_TYPE_MESSAGE = 'Поле {#label} должно быть строкой';
+const INCORRECT_FIELD_FORMAT_MESSAGE = 'Некорректный формат поля {#label}';
+const INCORRECT_PARAM_FORMAT_MESSAGE = 'Некорректный формат параметра {#label}';
+const MIN_LENGTH_MESSAGE = 'Минимальная длина поля {#label} - {#limit}';
+const MAX_LENGTH_MESSAGE = 'Максимальная длина поля {#label} - {#limit}';
+// db validation messages:
+const DB_URL_FORMAT_MESSAGE = 'invalid URL format';
+const DB_EMAIL_FORMAT_MESSAGE = 'invalid email format';
 
 // statusCode = 401 error messages
 const USER_UNAUTHORIZED_MESSAGE = 'Для доступа к запрашиваемому ресурсу необходима авторизация';
@@ -28,13 +32,16 @@ const USER_CONFLICT_MESSAGE = 'Пользователь с указанным em
 const INTERNAL_ERROR_MESSAGE = 'На сервере произошла ошибка';
 
 module.exports = {
-  requiredMessageTemplate,
-  emptyFieldMessageTemplate,
-  stringTypeMessageTemplate,
-  incorrectFormatMessageTemplate,
-  incorrectParamMessageTemplate,
-  minLengthMessageTemplate,
-  maxLengthMessageTemplate,
+  REQUIRED_FIELD_MESSAGE,
+  EMPTY_FIELD_MESSAGE,
+  STRING_TYPE_MESSAGE,
+  INCORRECT_FIELD_FORMAT_MESSAGE,
+  INCORRECT_PARAM_FORMAT_MESSAGE,
+  MIN_LENGTH_MESSAGE,
+  MAX_LENGTH_MESSAGE,
+
+  DB_URL_FORMAT_MESSAGE,
+  DB_EMAIL_FORMAT_MESSAGE,
 
   USER_UNAUTHORIZED_MESSAGE,
   USER_LOGIN_FAILED_MESSAGE,

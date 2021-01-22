@@ -2,33 +2,33 @@ const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 const { ObjectId } = require('mongoose').Types;
 const {
-  requiredMessageTemplate,
-  emptyFieldMessageTemplate,
-  stringTypeMessageTemplate,
-  incorrectFormatMessageTemplate,
-  incorrectParamMessageTemplate,
-  minLengthMessageTemplate,
-  maxLengthMessageTemplate,
+  REQUIRED_FIELD_MESSAGE,
+  EMPTY_FIELD_MESSAGE,
+  STRING_TYPE_MESSAGE,
+  INCORRECT_FIELD_FORMAT_MESSAGE,
+  INCORRECT_PARAM_FORMAT_MESSAGE,
+  MIN_LENGTH_MESSAGE,
+  MAX_LENGTH_MESSAGE,
 } = require('../configs/error-messages');
 
 const emailRule = Joi.string().trim().lowercase()
   .required()
   .email()
   .messages({
-    'any.required': requiredMessageTemplate('email'),
-    'string.base': stringTypeMessageTemplate('email'),
-    'string.empty': emptyFieldMessageTemplate('email'),
-    'string.email': incorrectFormatMessageTemplate('email'),
+    'any.required': REQUIRED_FIELD_MESSAGE,
+    'string.base': STRING_TYPE_MESSAGE,
+    'string.empty': EMPTY_FIELD_MESSAGE,
+    'string.email': INCORRECT_FIELD_FORMAT_MESSAGE,
   });
 
 const passwordRule = Joi.string().trim()
   .required()
   .min(8)
   .messages({
-    'any.required': requiredMessageTemplate('password'),
-    'string.base': stringTypeMessageTemplate('password'),
-    'string.empty': emptyFieldMessageTemplate('password'),
-    'string.min': minLengthMessageTemplate('password', '8'),
+    'any.required': REQUIRED_FIELD_MESSAGE,
+    'string.base': STRING_TYPE_MESSAGE,
+    'string.empty': EMPTY_FIELD_MESSAGE,
+    'string.min': MIN_LENGTH_MESSAGE,
   });
 
 module.exports.validateUserBody = celebrate({
@@ -40,62 +40,62 @@ module.exports.validateUserBody = celebrate({
       .min(2)
       .max(30)
       .messages({
-        'any.required': requiredMessageTemplate('name'),
-        'string.base': stringTypeMessageTemplate('name'),
-        'string.empty': emptyFieldMessageTemplate('name'),
-        'string.min': minLengthMessageTemplate('name', '2'),
-        'string.max': maxLengthMessageTemplate('name', '30'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
+        'string.min': MIN_LENGTH_MESSAGE,
+        'string.max': MAX_LENGTH_MESSAGE,
       }),
   }),
-});
+}, { abortEarly: false });
 
 module.exports.validateAuthentication = celebrate({
   body: Joi.object().keys({
     email: emailRule,
     password: passwordRule,
   }),
-});
+}, { abortEarly: false });
 
 module.exports.validateArticleBody = celebrate({
   body: Joi.object().keys({
     keyword: Joi.string().trim().lowercase()
       .required()
       .messages({
-        'any.required': requiredMessageTemplate('keyword'),
-        'string.base': stringTypeMessageTemplate('keyword'),
-        'string.empty': emptyFieldMessageTemplate('keyword'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     title: Joi.string()
       .required()
       .messages({
-        'any.required': requiredMessageTemplate('title'),
-        'string.base': stringTypeMessageTemplate('title'),
-        'string.empty': emptyFieldMessageTemplate('title'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     text: Joi.string()
       .required()
       .messages({
-        'any.required': requiredMessageTemplate('text'),
-        'string.base': stringTypeMessageTemplate('text'),
-        'string.empty': emptyFieldMessageTemplate('text'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     date: Joi.string()
       .required()
       .messages({
-        'any.required': requiredMessageTemplate('date'),
-        'string.base': stringTypeMessageTemplate('date'),
-        'string.empty': emptyFieldMessageTemplate('date'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     source: Joi.string()
       .required()
       .messages({
-        'any.required': requiredMessageTemplate('source'),
-        'string.base': stringTypeMessageTemplate('source'),
-        'string.empty': emptyFieldMessageTemplate('source'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     link: Joi.string()
@@ -104,12 +104,12 @@ module.exports.validateArticleBody = celebrate({
         if (validator.isURL(value)) {
           return value;
         }
-        return helpers.message(incorrectFormatMessageTemplate('link'));
+        return helpers.message(INCORRECT_FIELD_FORMAT_MESSAGE);
       })
       .messages({
-        'any.required': requiredMessageTemplate('link'),
-        'string.base': stringTypeMessageTemplate('link'),
-        'string.empty': emptyFieldMessageTemplate('link'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
 
     image: Joi.string()
@@ -118,15 +118,15 @@ module.exports.validateArticleBody = celebrate({
         if (validator.isURL(value)) {
           return value;
         }
-        return helpers.message(incorrectFormatMessageTemplate('image'));
+        return helpers.message(INCORRECT_FIELD_FORMAT_MESSAGE);
       })
       .messages({
-        'any.required': requiredMessageTemplate('image'),
-        'string.base': stringTypeMessageTemplate('image'),
-        'string.empty': emptyFieldMessageTemplate('image'),
+        'any.required': REQUIRED_FIELD_MESSAGE,
+        'string.base': STRING_TYPE_MESSAGE,
+        'string.empty': EMPTY_FIELD_MESSAGE,
       }),
   }),
-});
+}, { abortEarly: false });
 
 module.exports.validateObjectIdParam = celebrate({
   params: Joi.object().keys({
@@ -135,7 +135,7 @@ module.exports.validateObjectIdParam = celebrate({
         if (ObjectId.isValid(value)) {
           return value;
         }
-        return helpers.message(incorrectParamMessageTemplate('id'));
+        return helpers.message(INCORRECT_PARAM_FORMAT_MESSAGE);
       }),
   }),
-});
+}, { abortEarly: false });
