@@ -4,7 +4,7 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error');
 const ConflictError = require('../errors/conflict-error');
 const jwtSign = require('../utils/jwt-sign');
-const { SALT_ROUND } = require('../configs/index');
+const { SALT_ROUND, JWT_VALIDITY_DURATION } = require('../configs');
 const { USER_CONFLICT_MESSAGE, USER_NOT_FOUND_MESSAGE } = require('../configs/error-messages');
 
 module.exports.createUser = (req, res, next) => {
@@ -31,7 +31,7 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwtSign({ _id: user._id }, '7d');
+      const token = jwtSign({ _id: user._id }, JWT_VALIDITY_DURATION);
       res.send({ token });
     })
     .catch((err) => next(err));

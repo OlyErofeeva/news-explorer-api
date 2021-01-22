@@ -5,10 +5,12 @@ const {
 } = process.env;
 
 const SALT_ROUND = 10;
+const JWT_VALIDITY_DURATION = '7d';
 
 module.exports = {
   PORT,
   MONGO_URL,
   JWT_SECRET,
   SALT_ROUND,
+  JWT_VALIDITY_DURATION,
 };
