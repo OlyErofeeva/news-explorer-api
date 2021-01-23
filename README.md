@@ -5,6 +5,5 @@
 84.201.147.125
 
 ## Обратиться к API можно по адресам:  
-https://api.oly-news.students.nomoredomains.icu
-
+https://api.oly-news.students.nomoredomains.icu  
 https://www.api.oly-news.students.nomoredomains.icu
